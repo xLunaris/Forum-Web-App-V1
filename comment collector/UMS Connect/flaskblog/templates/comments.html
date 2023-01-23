@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="{{ url_for('collector.comments') }}">
+    <label for="post_id">Enter post ID:</label>
+    <input type="text" id="post_id" name="post_id" required>
+    <input type="submit" value="Submit">
+</form>
+<div class="col-md-20">
+    <div class="content-section">
+        {% if comments %}
+            <h3>Comments for Post: {{ post_title }}</h3>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Comment ID</th>
+                        <th>Author</th>
+                        <th>Text</th>
+                        <th>Date Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.author }}</td>
+                        <td>{{ comment.text }}</td>
+                        <td>{{ comment.date_created }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
